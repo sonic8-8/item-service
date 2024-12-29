@@ -2,6 +2,7 @@ package com.chain.itemservice.web.item.basic;
 
 import com.chain.itemservice.domain.Item;
 import com.chain.itemservice.domain.ItemRepository;
+import com.chain.itemservice.web.item.ItemType;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +30,11 @@ public class BasicItemController {
         regions.put("BUSAN", "부산");
         regions.put("JEJU", "제주");
         return regions;
+    }
+
+    @ModelAttribute("itemTypes")
+    public ItemType[] itemTypes() {
+        return ItemType.values();
     }
 
     @GetMapping
@@ -94,6 +100,7 @@ public class BasicItemController {
 
         log.info("item.open={}", item.getOpen());
         log.info("item.regions={}", item.getRegions());
+        log.info("item.itemType={}", item.getItemType());
 
         return "redirect:/basic/items/{itemId}";
     }
